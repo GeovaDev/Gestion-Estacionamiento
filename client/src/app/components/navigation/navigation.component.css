@@ -1,0 +1,46 @@
+.fuente{
+    font-family: "Poppins",sans-serif;
+    color: #6e75ee;
+}
+.cPrueba{
+    font-family: "Poppins",sans-serif;
+}
+nav{
+    background-color: #fff;
+    box-shadow: 0px 7px 10px 1px rgba(145,138,138,0.61);
+    -webkit-box-shadow: 0px 7px 10px 1px rgba(145,138,138,0.61);
+    -moz-box-shadow: 0px 7px 10px 1px rgba(145,138,138,0.61);
+}
+.active{
+    color: #0713F2!important;
+}
+.fuente:hover{
+    color: #0713F2!important;
+}
+.btn-outline-light{
+    border-color: #0713F2!important;
+}
+.btn-outline-light a{
+    color: #0713F2;
+}
+button li .btn-inicio:hover{
+    color: #fff;
+}
+.btn-outline-light:hover{
+    border-color: #050dac!important;
+    background-color: #0713F2!important;
+    color: #fff;
+}
+.btn-inicio{
+    color: #6e75ee;
+    font-family: "Poppins",sans-serif;
+}
+.dropdown-menu{
+    box-shadow: 0px 10px 12px 0px rgba(0,0,0,0.64);
+    -webkit-box-shadow: 0px 10px 12px 0px rgba(0,0,0,0.64);
+    -moz-box-shadow: 0px 10px 12px 0px rgba(0,0,0,0.64);
+}
+.navbar-toggler{
+    border-color: #0713F2!important;
+    --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%287, 19, 242, 0.80%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e")!important;
+}

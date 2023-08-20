@@ -1,0 +1,35 @@
+<h1>Códigos QR de vehículos</h1>
+<strong>Instrucciones: </strong><p>1. Búsque y dé click en el botón abrir del vehículo a ingresar/salir.
+    </p><p>2. Muestre el código QR al guardia para poder registrar su entrada.
+</p>
+<br>
+<div class="row">
+    <div class="col-md-4 text-center" *ngFor="let vhData of vehiculoData">
+        <div class="card mb-4">
+            <img class="card-img-top" style="width: 80%; margin-left: 10%;" src="{{vhData.qrCode}}" alt="Imagen">
+            <div class="card-body">
+            <h5 class="card-title">{{vhData.marca}} {{vhData.modelo}} {{vhData.color}}</h5>
+            <p class="card-text">Código QR de Vehículo</p>
+            <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="obtenerImgQR(vhData.numPlacas)">Abrir</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content" *ngFor="let vd2 of vehiculoData2">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Código QR de {{vd2.numPlacas}}</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+            <img class="card-img-top" style="width: 95%; margin-left: 2.5%;" src="{{vd2.qrCode}}" alt="Imagen">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>

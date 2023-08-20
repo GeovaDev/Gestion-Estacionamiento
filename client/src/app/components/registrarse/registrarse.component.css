@@ -1,0 +1,14 @@
+.registroForm{
+    width: 75%!important;
+    border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    border: 2px groove #0713f2;
+}
+.registroForm2{
+    width: 90%;
+    padding-left: 10%;
+}
+.container{
+    padding-left: 25%;
+}

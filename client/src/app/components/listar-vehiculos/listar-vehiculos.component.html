@@ -1,0 +1,138 @@
+<h1>Lista de vehículos</h1>
+<div class="containter text-center">
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-hover table-bordered border-primary">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Placas</th>
+                    <th scope="col">Marca</th>
+                    <th scope="col">Modelo</th>
+                    <th scope="col">Color</th>
+                    <th scope="col">Usuario</th>
+                    <th scope="col">Tipo Vehículo</th>
+                    <th scope="col">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let vehiculo of vehiculos; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ vehiculo.numPlacas }}</td>
+                    <td>{{ vehiculo.marca }}</td>
+                    <td>{{ vehiculo.modelo }}</td>
+                    <td>{{ vehiculo.color }}</td>
+                    <td>{{ vehiculo.cveUsuario }}</td>
+                    <td *ngIf="vehiculo.idTipoVehiculo===1">Automovil</td>
+                    <td *ngIf="vehiculo.idTipoVehiculo===2">Camioneta</td>
+                    <td *ngIf="vehiculo.idTipoVehiculo===3">Motocicleta</td>
+                    <td *ngIf="vehiculo.idTipoVehiculo===4">Autobús</td>
+                    <td *ngIf="vehiculo.idTipoVehiculo===5">Camión</td>
+                    <td *ngIf="vehiculo.idTipoVehiculo===6">Bicicleta</td>
+                    <td *ngIf="vehiculo.idTipoVehiculo===7">Triciclo</td>
+                    <td>
+                        <button type="button" class="btn btn-success" style="margin-right: 7px!important;" data-bs-toggle="modal" data-bs-target="#modificarUsuarioModal" (click)="guardarId(vehiculo.numPlacas); getVehiculoPorIDModal(); listarUsuariosSelect(); listarTipoVehiculo();"><i class="fa-solid fa-gear" style="color: #ffffff;"></i></button>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#borrarVehiculoModal" (click)="guardarId(vehiculo.numPlacas);"><i class="fa-solid fa-trash" style="color: #ffffff;"></i></button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modificarUsuarioModal" tabindex="-1" aria-labelledby="modificarUsuarioModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="modificarUsuarioModalLabel">Modificar datos del vehículo:</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container mt-4" style="width: 50vw;">
+          <div class="row">
+            <div class="col-md-8">
+              <div *ngIf="mostrarAlertaUpdate" class="alert alert-success" role="alert">
+                <div>
+                  <i class="fa-solid fa-circle-check"></i> 
+                  Se ha actualizado al usuario con éxito.
+                </div>
+              </div>
+              <div *ngIf="hayError" class="alert alert-danger" role="alert">
+                <div>
+                  <i class="fa-solid fa-circle-check"></i> 
+                  Ocurrió un error inesperado, contacta al administrador de la aplicación.
+                </div>
+              </div>
+              <div *ngIf="!mostrarAlertaUpdate">
+                <form *ngFor="let vehiculoSel of vehiculoSeleccionado;">
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="marca" name="marca" placeholder="Tesla" required [(ngModel)]="vehiculoSel.marca">
+                    <label for="marca">Marca</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="modelo" name="modelo" placeholder="Model 3" [(ngModel)]="vehiculoSel.modelo" required>
+                    <label for="modelo">Modelo</label>
+                  </div>                    
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="color" name="color" placeholder="Negro" required [(ngModel)]="vehiculoSel.color">
+                <label for="color">Color</label>
+              </div>
+              <div class="form-floating mb-3">
+                <select class="form-select" id="cveUsuario" name="cveUsuario" [(ngModel)]="vehiculoSel.cveUsuario" required>
+                  <option *ngFor="let user of usuarios" [value]="user.cveUsuario">{{user.nombre}} {{user.apePat}} {{user.apeMat}}</option>
+                </select>
+                <label for="usuario" class="form-label">Nombre del usuario</label>
+              </div>
+              <div class="form-floating mb-3">
+                <select class="form-select" id="tipoVehiculo" name="tipoVehiculo" [(ngModel)]="vehiculoSel.idTipoVehiculo" required>
+                  <option *ngFor="let vehiC of tipoVehi" [value]="vehiC.idTipoVehiculo">{{vehiC.nomTipoVehiculo}}</option>
+                </select>
+                <label for="tipoVehiculo" class="form-label">Tipo de Vehículo:</label>
+              </div>
+            </form>
+              </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <div class="modal-footer" *ngIf="!mostrarAlertaUpdate">
+        <button type="button" class="btn btn-success" (click)="actualizarVehiculo()">Guardar cambios</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="limpiarVariables();">Cerrar</button>
+      </div>
+      <div class="modal-footer" *ngIf="mostrarAlertaUpdate">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="limpiarVariables();">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="borrarVehiculoModal" tabindex="-1" aria-labelledby="borrarVehiculoModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <p *ngIf="!mostrarAlertaDelete">¿Estás seguro de querer borrar el vehículo? Ésta acción es irreversible.</p>
+        <div *ngIf="mostrarAlertaDelete" class="alert alert-success" role="alert">
+          <div>
+            <i class="fa-solid fa-circle-check"></i> 
+            Se ha eliminado el vehículo con éxito.
+          </div>
+        </div>
+        <div *ngIf="hayError" class="alert alert-danger" role="alert">
+          <div>
+            <i class="fa-solid fa-circle-check"></i> 
+              Ocurrió un error. Contacta al administrador de la aplicación.
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer" *ngIf="!mostrarAlertaDelete">
+        <button type="button" class="btn btn-danger" (click)="eliminarVehiculo();">Sí, eliminar vehículo.</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="limpiarVariables();">Cerrar</button>
+      </div>
+      <div class="modal-footer" *ngIf="mostrarAlertaDelete">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="limpiarVariables();">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>

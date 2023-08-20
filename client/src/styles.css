@@ -1,0 +1,16 @@
+  .main-container {
+    min-height: 100vh;
+  }
+  
+  footer {
+    position: static;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  .nav-sticky {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  

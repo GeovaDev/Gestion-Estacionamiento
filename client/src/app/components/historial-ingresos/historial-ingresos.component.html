@@ -1,0 +1,31 @@
+<h1>Historial de ingresos</h1>
+<div class="containter text-center">
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-hover table-bordered border-primary">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">ID Acceso</th>
+                    <th scope="col">ID Estación</th>
+                    <th scope="col">Fecha de inicio</th>
+                    <th scope="col">Fecha final</th>
+                    <th scope="col">Hora de inicio</th>
+                    <th scope="col">Hora final</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let historial of historialData; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ historial.cveUsuario }}</td>
+                    <td>{{ historial.nombre }}</td>
+                    <td>{{ historial.apePat }}</td>
+                    <td>{{ historial.apeMat }}</td>
+                    <td>{{ historial.telefono }}</td>
+                    <td>{{ historial.correo }}</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+</div>

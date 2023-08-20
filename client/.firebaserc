@@ -1,0 +1,16 @@
+{
+  "projects": {
+    "default": "gestionestacionamiento-854db",
+    "gestionestacionamiento": "gestionestacionamiento-854db"
+  },
+  "targets": {
+    "gestionestacionamiento-854db": {
+      "hosting": {
+        "client": [
+          "gestionestacionamiento-854db"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

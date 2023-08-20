@@ -1,0 +1,70 @@
+<div class="container mt-4" style="width: 50vw;">
+  <img src="../../../assets/images/estacionamiento1.png" class="img-fluid" alt="...">
+  <h2 class="mb-4 text-center" style="color: #0713F2;">Registrar Vehículo</h2>
+  <div class="row">
+    <div class="col-md-6">
+      <form (ngSubmit)="registrarVehiculo()" #userForm="ngForm">
+          <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="numPlacas" name="numPlacas" placeholder="123ASB87" required [(ngModel)]="vehInst.numPlacas">
+              <label for="numPlacas">Número de placas</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="marca" name="marca" placeholder="Toyota" required [(ngModel)]="vehInst.marca">
+              <label for="marca">Marca</label>
+            </div>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="modelo" name="modelo" placeholder="Highlander" required [(ngModel)]="vehInst.modelo">
+          <label for="modelo">Modelo</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="color" name="color" placeholder="Azul Turquesa" required [(ngModel)]="vehInst.color">
+          <label for="color">Color:</label>
+        </div>
+        <div class="form-floating mb-3">
+          <select class="form-select" id="cveUsuario" name="cveUsuario" [(ngModel)]="vehInst.cveUsuario" required>
+            <option *ngFor="let user of usuarios" [value]="user.cveUsuario">{{user.nombre}} {{user.apePat}} {{user.apeMat}}</option>
+          </select>
+          <label for="usuario" class="form-label">Nombre del usuario</label>
+        </div>
+        <div class="form-floating mb-3">
+          <select class="form-select" id="tipoVehiculo" name="tipoVehiculo" [(ngModel)]="vehInst.idTipoVehiculo" required>
+            <option *ngFor="let vehiC of tipoVehi" [value]="vehiC.idTipoVehiculo">{{vehiC.nomTipoVehiculo}}</option>
+          </select>
+          <label for="tipoVehiculo" class="form-label">Tipo de Vehículo:</label>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registrarVehiculoModal" [disabled]="!userForm.valid">Registrar Vehículo</button>
+        </div>
+      </form>
+  </div>
+  <div class="col-md-6 divQR text-center">
+    <p>QR de usuario</p>
+    <img src="https://cdn.vectorstock.com/i/preview-1x/48/06/image-preview-icon-picture-placeholder-vector-31284806.jpg" alt="">
+  </div>
+</div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="registrarVehiculoModal" tabindex="-1" aria-labelledby="registrarVehiculoModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div *ngIf="mostrarAlertaInsert" class="alert alert-success" role="alert">
+          <div>
+            <i class="fa-solid fa-circle-check"></i> 
+            El vehículo ingresado se ha insertado con éxito.
+          </div>
+        </div>
+        <div *ngIf="hayError" class="alert alert-danger" role="alert">
+          <div>
+            <i class="fa-solid fa-circle-check"></i> 
+              Ocurrió un error. Contacta al administrador de la aplicación.
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="redirectListarVehiculos()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>

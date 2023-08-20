@@ -1,0 +1,14 @@
+{
+    "users": [
+      {
+        "id": 1,
+        "usuario": "maestro1",
+        "contra": "123456789",
+        "repcontra": "123456789",
+        "telefono": "1234567890",
+        "email": "admin@email.com",
+        "rol": "Maestro",
+        "numControl": "1234567890"
+      }
+    ]
+  }

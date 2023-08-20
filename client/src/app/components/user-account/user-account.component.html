@@ -1,0 +1,26 @@
+<div style="margin: 0 20px;">
+  <h1 style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;" style="text-align: center; margin-bottom: 2%; margin-top: 2%;"><strong> Perfil de Usuario</strong></h1>
+    <div style="display: inline-block;" style="float: left; margin-right: 20px;"  class="card card-body text-center" width="50%">
+      <img src="{{usrData3.imgUsuario}}" style="width: 250px;">
+      <p>{{usrData3.nombre}} {{usrData3.apePat}} {{usrData3.apeMat}}</p>
+    </div>
+    <div style="display: inline-block; margin-left: 20%;" style="border-color: black;" class="card card-body text-left" width="50%">
+        <h3 style="text-align: left;">Detalles del Usuario</h3>
+        <h6>Tipo de Usuario:</h6>
+        <p *ngIf="usrData3.idTipoUsuario===1">Administrador</p>
+        <p *ngIf="usrData3.idTipoUsuario===2">Maestro</p>
+        <p *ngIf="usrData3.idTipoUsuario===3">Proveedor</p>
+        <p *ngIf="usrData3.idTipoUsuario===4">Alumno</p>
+        <h6>Número de Telefono:</h6>
+        <p>{{usrData3.telefono}}</p>
+        <h6>Correo Electronico:</h6>
+        <p>{{usrData3.correo}}</p>
+        <h6>Numero de Control o Clave:</h6>
+        <p>{{idUsuario}}</p>
+        <div class="grid gap-3" width="35" height="35">
+          <button type="button" class="btn btn-link" class="position-absolute top-0 end-0">
+            <img src="https://cdn.icon-icons.com/icons2/1558/PNG/512/353430-checkbox-edit-pen-pencil_107516.png" alt="Editar" width="35" height="35" >
+          </button>
+        </div>
+    </div>
+</div>

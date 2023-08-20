@@ -1,0 +1,140 @@
+<h1>Lista de usuarios</h1>
+<div class="containter text-center">
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-hover table-bordered border-primary">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido Paterno</th>
+                    <th scope="col">Apellido Materno</th>
+                    <th scope="col">Teléfono</th>
+                    <th scope="col">Correo</th>
+                    <th scope="col">Tipo Usuario</th>
+                    <th scope="col">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let usuario of usuarios; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ usuario.cveUsuario }}</td>
+                    <td>{{ usuario.nombre }}</td>
+                    <td>{{ usuario.apePat }}</td>
+                    <td>{{ usuario.apeMat }}</td>
+                    <td>{{ usuario.telefono }}</td>
+                    <td>{{ usuario.correo }}</td>
+                    <td *ngIf="usuario.idTipoUsuario===1">Administrador</td>
+                    <td *ngIf="usuario.idTipoUsuario===2">Maestro</td>
+                    <td *ngIf="usuario.idTipoUsuario===3">Proveedor</td>
+                    <td *ngIf="usuario.idTipoUsuario===4">Alumno</td>
+                    <td>
+                        <button type="button" class="btn btn-success" style="margin-right: 7px!important;" data-bs-toggle="modal" data-bs-target="#modificarUsuarioModal" (click)="guardarId(usuario.cveUsuario); getUsuarioPorIDModal(); getUsrRoles();"><i class="fa-solid fa-gear" style="color: #ffffff;"></i></button>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="guardarId(usuario.cveUsuario);"><i class="fa-solid fa-trash" style="color: #ffffff;"></i></button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modificarUsuarioModal" tabindex="-1" aria-labelledby="modificarUsuarioModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="modificarUsuarioModalLabel">Modificar datos del usuario:</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+
+        <div class="container mt-4" style="width: 50vw;">
+          <div class="row">
+            <div class="col-md-8">
+              <div *ngIf="mostrarAlertaUpdate" class="alert alert-success" role="alert">
+                <div>
+                  <i class="fa-solid fa-circle-check"></i> 
+                  Se ha actualizado al usuario con éxito.
+                </div>
+              </div>
+              <div *ngIf="hayError" class="alert alert-danger" role="alert">
+                <div>
+                  <i class="fa-solid fa-circle-check"></i> 
+                  Ocurrió un error inesperado, contacta al administrador de la aplicación.
+                </div>
+              </div>
+              <div *ngIf="!mostrarAlertaUpdate">
+                <form *ngFor="let usuarioS of usuarioSeleccionado;">
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Pepe" required [(ngModel)]="usuarioS.nombre">
+                    <label for="nombre">Nombre</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="apePat" name="apePat" placeholder="González" [(ngModel)]="usuarioS.apePat" required>
+                    <label for="apePat">Apellido Paterno</label>
+                  </div>                    
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="apeMat" name="apeMat" placeholder="González" required [(ngModel)]="usuarioS.apeMat">
+                <label for="apeMat">Apellido Materno</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="telefono" name="telefono" placeholder="1234567890" required [(ngModel)]="usuarioS.telefono">
+                <label for="telefono">Teléfono</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="correo" name="correo" placeholder="email@email.com" required [(ngModel)]="usuarioS.correo">
+                <label for="correo">Correo electrónico</label>
+              </div>
+              <div class="form-floating mb-3">
+                <select class="form-select" id="idTipoUsuario" name="idTipoUsuario" required [(ngModel)]="usuarioS.idTipoUsuario">
+                  <option *ngFor="let role of usrRoles" [value]="role.idTipoUsuario">{{role.nomTipoUsuario}}</option>
+                </select>
+                <label for="usuario" class="form-label">Tipo de usuario</label>
+              </div>
+            </form>
+              </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <div class="modal-footer" *ngIf="!mostrarAlertaUpdate">
+        <button type="button" class="btn btn-success" (click)="actualizarUsuario()">Guardar cambios</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+      <div class="modal-footer" *ngIf="mostrarAlertaUpdate">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="limpiarVariables();">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <p *ngIf="!mostrarAlertaDelete">¿Estás seguro de querer borrar el usuario? Esta acción es irreversible.</p>
+        <div *ngIf="mostrarAlertaDelete" class="alert alert-success" role="alert">
+          <div>
+            <i class="fa-solid fa-circle-check"></i> 
+            Se ha eliminado al usuario con éxito.
+          </div>
+        </div>
+        <div *ngIf="hayError" class="alert alert-danger" role="alert">
+          <div>
+            <i class="fa-solid fa-circle-check"></i> 
+              Ocurrió un error. Contacta al administrador de la aplicación.
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer" *ngIf="!mostrarAlertaDelete">
+        <button type="button" class="btn btn-danger" (click)="eliminarUsuario();">Sí, eliminar usuario.</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="limpiarVariables();">Cerrar</button>
+      </div>
+      <div class="modal-footer" *ngIf="mostrarAlertaDelete">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="limpiarVariables();">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>

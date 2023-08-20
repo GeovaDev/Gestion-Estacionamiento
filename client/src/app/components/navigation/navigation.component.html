@@ -1,0 +1,140 @@
+<nav class="navbar navbar-expand-lg navbar-dark" *ngIf="!usuarioExiste && idTipoUsuario===0">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"><img src="../../../assets/images/cropped-Logo-prueba.png" width="50"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link fuente" [routerLink]="['/principal']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" href="/principal">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link fuente" [routerLink]="['/nosotros']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" href="/nosotros">Nosotros</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link fuente" [routerLink]="['/servicios']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" href="/servicios">Servicios</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link fuente" [routerLink]="['/contactanos']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" href="/contactanos">Contáctanos</a>
+          </li>
+        </ul>
+        <button class="btn btn-outline-light">
+          <li class="nav-item dropdown" style="list-style-type: none !important;">
+              <a class="nav-link dropdown-toggle btn-inicio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Iniciar sesión
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" role="menu" style="width: 18rem;">
+                    <form>
+                      <div style="padding-left: 20px; padding-right: 20px;">
+                        <p class="text-center h4 cPrueba" style="padding-top: 10px;">Inicia sesión</p>
+                        <p class="h6 text-center" style="margin-top: 20px;">Introduce tu usuario:</p>
+                        <input type="text" [(ngModel)]="loginData.cveUsuario" name="cveUsuario" class="form-control" id="cveUsuario" placeholder="Nombre de usuario" required>
+                        <br><p class="h6 text-center">Contraseña:</p>
+                        <input type="password" [(ngModel)]="loginData.passwd" name="passwd" class="form-control" id="passwd" placeholder="************" required>
+                        <div class="form-check form-switch text-center" style="margin-top: 20px;">
+                          <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+                          <label class="form-check-label" for="flexSwitchCheckChecked">Mantener sesión iniciada</label>
+                        </div>
+                        <div class="text-center">
+                          <button type="submit" class="btn btn-success" style="margin-top: 25px; margin-bottom: 20px; color: #fff; margin-right: 20px;" (click)="login()">Iniciar sesión</button>
+                          <a href="/registrarse"><button type="button" class="btn btn-primary" style="margin-top: 25px; margin-bottom: 20px; color: #fff;">Registrarse</button></a>
+                        </div>
+                      </div>
+                    </form>
+              </ul>
+          </li>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <nav class="navbar navbar-expand-lg navbar-dark" *ngIf="usuarioExiste && idTipoUsuario === 1">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#"><img src="../../../assets/images/cropped-Logo-prueba.png" width="50"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link fuente" [routerLink]="['/inicio']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" href="/inicio">Inicio</a>
+            </li>
+            <li class="nav-item dropdown">
+              <button class="btn dropdown-toggle fuente" data-bs-toggle="dropdown" aria-expanded="false">
+                Vehículo
+              </button>
+              <ul class="dropdown-menu dropdown-menu">
+                <li><a class="dropdown-item" [routerLink]="['/registrar-vehiculo']" href="/registrar-vehiculo">Registrar vehículo</a></li>
+                <li><a class="dropdown-item" [routerLink]="['/listar-vehiculos']" href="/listar-vehiculos">Operaciones de vehículo</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <button class="btn dropdown-toggle fuente" data-bs-toggle="dropdown" aria-expanded="false">
+                Información Usuario
+              </button>
+              <ul class="dropdown-menu dropdown-menu">
+                <li><a class="dropdown-item" [routerLink]="['/registrarse']" href="/registrarse">Registrar usuario</a></li>
+                <li><a class="dropdown-item" [routerLink]="['/listar-usuarios']" href="/listar-usuarios">Operaciones de usuarios</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link fuente" [routerLink]="['/registrar-ingreso-adm']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" href="/registrar-ingreso-adm">Registrar ingreso/salida</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link fuente" [routerLink]="['/ver-asignaciones']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" href="/ver-asignaciones">Ver asignaciones</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link fuente" [routerLink]="['/contactanos']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" href="/contactanos">Contáctanos</a>
+            </li>
+          </ul>
+          <div class="dropdown">
+            <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fa-solid fa-user" style="margin-right: 5px;"></i>Administrador
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" [routerLink]="['/mi-cuenta']" href="/mi-cuenta" type="button"><i class="fa-solid fa-address-card"></i> Mi cuenta</a></li>
+              <li><a class="dropdown-item" [routerLink]="['/configuracion']" href="/configuracion" type="button"><i class="fa-solid fa-user-gear"></i> Configuración de cuenta</a></li>
+              <li><button class="dropdown-item" type="button" (click)="cerrarSesion();"><i class="fa-solid fa-circle-xmark"></i> Cerrar sesión</button></li>
+            </ul>
+          </div>
+        </div>
+    </div>
+  </nav>
+
+  <nav class="navbar navbar-expand-lg navbar-dark" *ngIf="usuarioExiste && idTipoUsuario !== 1">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"><img src="../../../assets/images/cropped-Logo-prueba.png" width="50"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link fuente" [routerLink]="['/inicio']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" href="/inicio">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link fuente" [routerLink]="['/mis-vehiculos']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" href="/mis-vehiculos">Mis vehículos</a>
+          </li>
+          <li class="nav-item dropdown">
+            <button class="btn dropdown-toggle fuente" data-bs-toggle="dropdown" aria-expanded="false">
+              Ingresos
+            </button>
+            <ul class="dropdown-menu dropdown-menu">
+              <li><a class="dropdown-item" [routerLink]="['/registrar-ingreso']" href="/registrar-ingreso">Registrar ingreso/salida</a></li>
+              <li><a class="dropdown-item" [routerLink]="['/historial-ingresos']" href="/historial-ingresos">Historial de ingresos</a></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="dropdown">
+          <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa-solid fa-user" style="margin-right: 5px;"></i>Usuario
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" [routerLink]="['/mi-cuenta']" href="/mi-cuenta" type="button"><i class="fa-solid fa-address-card"></i> Mi cuenta</a></li>
+            <li><button class="dropdown-item" type="button" (click)="cerrarSesion();"><i class="fa-solid fa-circle-xmark"></i> Cerrar sesión</button></li>
+          </ul>
+        </div>
+      </div>
+  </div>
+</nav>
