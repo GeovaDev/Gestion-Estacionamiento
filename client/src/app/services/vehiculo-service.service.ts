@@ -9,7 +9,7 @@ import { qrModel } from '../models/qrModel';
 })
 export class VehiculoServiceService {
   //API_URI='http://localhost:3000/src/data';//Para el front-end
-  API_URI= 'http://localhost:50445/api'; //Backend
+  API_URI= 'https://ec2-34-201-28-5.compute-1.amazonaws.com:40756/api'; //Backend
   constructor(private http:HttpClient) { }
   listarVehiculos() {
     return this.http.get(`${this.API_URI}/vehiculos/vehiculos`);
